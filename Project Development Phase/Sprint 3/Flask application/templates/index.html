@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Engine failure prediction</title>
+</head>
+<body>
+  <nav class="navbar sticky-top  navbar-light text-light bg-primary">
+  <a class="navbar-brand text-light" href="#">Aircraft engine failiure predictions</a>
+</nav> 
+     <form method="POST"action="/predict.html">
+     <div id="inputs" class=" rounded-top mt-5 container-lg d-flex flex-column w-25 bg-secondary justify-content-center text-light"></div>  
+      <div class="bg-secondary w-25 bg-secondary container-lg d-flex flex-row justify-content-around text-light">
+        <div class="d-flex  justify-content-around rounded-bottom">
+        <input class="m-2 btn btn-success" type="submit"><input class="m-2 btn btn-dark" type="reset"><input class="m-2 btn btn-primary" value="Generate" type="button" onclick="generate()">
+      </div>
+    </div> 
+
+
+    </form>
+ 
+    <script>
+ col_names=['id', 'cycle', 'setting1','setting2','setting3','s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s20','s21'];
+
+let txt = "";
+col_names.forEach(myFunction);
+document.getElementById("inputs").innerHTML = txt;
+
+function myFunction(value, index, array) {
+    val="1 192 0.0009 -0.0000 100.0 518.67 643.54 1601.41 1427.20 14.62 21.61 551.25 2388.32 9033.22 1.30 48.25 520.08 2388.32 8110.93 8.5113 0.03 396 2388 100.00 38.48 22.9649";
+    valarr=val.split(" ");
+    //  txt += value+":"+"<input " +"type="+'"text"'+"name="+value+" value="+valarr[index]+">" + "<br>"; 
+      txt+="<div class="+'"mb-3 w-auto"'+"><label for="+'"formGroupExample"'+ " class="+'"form-label"'+">"+value+"</label>"+"<input name="+value+" "+"type="+'"text"'+"class="+'"form-control"'+" placeholder="+'"Another input placeholder"'+"id="+value+" "+"value="+valarr[index]+"></div>";
+    }
+function generate(){
+  // (Math.random() * (max - min)) + min
+  col_names=['id', 'cycle', 'setting1','setting2','setting3','s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s20','s21'];
+  max=[100,      362,        0.008,    0.000,  100,      518.67,    644.53,   1616.91,   1441.49,     14.62,     21.61,    556.06,   2388.56,   9244.59,    1.3,      48.53,    523.38,   2388.56,   8293.72,      8.5848,    0.03,400,     2388,      100,       39.43,     23.6184];
+  min=[   1,       1,       -0.0087,   -0.0006,  100,      518.6,    641.21, 1571.04,   1382.25,     14.62,     21.6,     549.85,   2387.9,    9021.73,  1.3,      46.85,    518.69,   2387.88,   8099.94,      8.3249,    0.03, 388,     2388,      100,       38.14,     22.8942];
+  col_names.forEach(fill)
+  function fill(value, index, array){
+    if (value=='id'|| value=='cycle')
+        {
+          document.getElementById(value).value =Math.floor(Math.random() * (max[index] - min[index])) + min[index] ;
+        }
+        else{
+            document.getElementById(value).value =(Math.random() * (max[index] - min[index])) + min[index] ;
+        }
+
+      document.getElementById("s21").value=(Math.random() * (23.6184 - 22.8942)) + 22.8942;
+          }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
